@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Acheter un billet | Maxx Événements - Réservation en ligne</title>
+    <meta name="description" content="Achetez vos billets pour les événements Maxx Événements à Marrakech. Réservation en ligne sécurisée, choix du type de billet, paiement simple.">
+    <meta name="keywords" content="billet, achat, réservation, événement, Marrakech, Maxx Événements">
+    <meta name="author" content="Maxx Événements">
+    <meta name="robots" content="Acheter un billet, follow">
+
+    <meta property="og:title" content="Maxx Événements - Créateur d’émotions à Marrakech">
+    <meta property="og:description" content="Transformez vos événements en souvenirs inoubliables avec Maxx Événements.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maxx-evenements.ma/">
+    <meta property="og:image" content="assets/img/og-image.webp">
+
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <link rel="preload" href="assets/img/logo.webp" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" as="style">
+
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+    <meta name="theme-color" content="#4C344C">
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <style>
+        :root {
+            --gold-yellow: rgb(251, 191, 8);
+            --pink-magenta: rgb(226, 64, 109);
+            --deep-purple: rgb(76, 52, 76);
+            --orange: rgb(242, 131, 54);
+            --light-beige: rgb(250, 245, 228);
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--light-beige);
+            color: var(--deep-purple);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+            font-weight: 800;
+            color: var(--pink-magenta);
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            color: var(--pink-magenta);
+            font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--gold-yellow);
+            color: var(--deep-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            box-shadow: 0 4px 18px rgba(251, 191, 8, 0.10);
+            flex-shrink: 0;
+            margin: 0 auto 18px auto;
+        }
+
+        .ticket-form-card {
+            box-shadow: 0 2px 12px rgba(76, 52, 76, 0.08);
+            border-radius: 18px;
+            background: #fff;
+            padding: 32px 24px;
+            margin-bottom: 24px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-label {
+            color: var(--deep-purple);
+            font-weight: 700;
+        }
+
+        .btn-submit {
+            background: var(--gold-yellow);
+            color: var(--deep-purple);
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.7rem 2.2rem;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--pink-magenta);
+            color: #fff;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(.77, 0, .18, 1), transform 0.8s cubic-bezier(.77, 0, .18, 1);
+        }
+
+        .fade-in[style*="opacity: 1"] {
+            transform: none;
+        }
+
+        .footer .sitename {
+            color: var(--deep-purple) !important;
+        }
+
+        /* Elite card with glass effect */
+        .elite-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(76, 52, 76, 0.15);
+            animation: slideUp 1s ease forwards;
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        .elite-card.fade-in[style*="opacity: 1"] {
+            transform: translateY(0);
+        }
+
+        /* Floating labels */
+        .floating-label {
+            position: relative;
+            margin-bottom: 1.8rem;
+        }
+
+        .floating-label input,
+        .floating-label select {
+            border: 2px solid rgba(76, 52, 76, 0.1);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .floating-label label {
+            position: absolute;
+            top: 50%;
+            left: 1.2rem;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 6px;
+            color: rgba(76, 52, 76, 0.6);
+            font-size: 0.95rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .floating-label input:focus,
+        .floating-label select:focus {
+            border-color: var(--pink-magenta);
+            box-shadow: 0 0 0 3px rgba(226, 64, 109, 0.2);
+        }
+
+        .floating-label input:not(:placeholder-shown)+label,
+        .floating-label select:valid+label {
+            top: -8px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: var(--pink-magenta);
+        }
+
+        /* Elite button */
+        .elite-btn {
+            background: linear-gradient(135deg, var(--gold-yellow), var(--orange));
+            color: var(--deep-purple);
+            font-weight: 800;
+            border-radius: 50px;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(251, 191, 8, 0.2);
+            transition: all 0.35s ease;
+        }
+
+        .elite-btn:hover {
+            background: linear-gradient(135deg, var(--pink-magenta), var(--deep-purple));
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 28px rgba(76, 52, 76, 0.25);
+        }
+
+        /* Icon bounce */
+        .bounce {
+            animation: bounceIcon 1.8s infinite;
+        }
+
+        /* Keyframes */
+        @keyframes bounceIcon {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="buy-tickets-page">
+    <div class="crosshair" id="crosshair"></div>
+
+    <header id="header" class="header d-flex align-items-center fixed-top" style="background: var(--deep-purple);">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <video autoplay loop muted playsinline style="height:100px; width:auto;">
+                    <source src="assets/logo-spin.webm" type="video/webm">
+                </video>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="Services.html"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="organisation.html">Organisation d’événements</a></li>
+                            <li><a href="production.html">Production de spectacles et artistes</a></li>
+                            <li><a href="management.html">Management d’artistes</a></li>
+                            <li><a href="karaoke.html">Karaoké</a></li>
+                            <li><a href="gestion-lieux.html">Gestion déléguée de lieux</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="blog.html">Actualités</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+            <a class="btn-gold btn-hero" href="contact.html">Demander un devis</a>
+        </div>
+    </header>
+
+
+    <main class="main">
+
+        <section class="page-title-section d-flex align-items-center" style="margin-top:80px;">
+            <div class="container">
+                <h1>Acheter un billet</h1>
+                <p>Réservez votre place pour nos événements à Marrakech</p>
+            </div>
+        </section>
+
+
+        <section class="container py-5">
+            <div class="ticket-form-card fade-in elite-card">
+                <div class="icon-circle bounce"><i class="bi bi-ticket-perforated"></i></div>
+                <h2 class="section-title mb-3">Achetez vos billets</h2>
+                <p class="text-muted mb-4">Choisissez votre type de billet et achetez votre place en toute sécurité.</p>
+
+                <form id="payment-form" class="elite-form">
+                    <div class="mb-3 floating-label">
+                        <input type="text" class="form-control" id="name" name="name" placeholder=" " required>
+                        <label for="name">Nom complet</label>
+                    </div>
+                    <div class="mb-3 floating-label">
+                        <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="mb-3 floating-label">
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="">Choisissez votre billet</option>
+                            <option value="entree">Entrée (+12 ans) - 20 MAD</option>
+                            <option value="pass-simple">Pass simple - 250 MAD</option>
+                            <option value="pass-premium">Pass premium - 400 MAD</option>
+                            <option value="pass-vip">Pass VIP - 800 MAD</option>
+                        </select>
+                        <label for="type">Type de billet</label>
+                    </div>
+                    <div class="mb-3 floating-label">
+                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1" placeholder=" " required>
+                        <label for="quantity">Quantité</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="card-element">Carte bancaire</label>
+                        <div id="card-element" class="form-control"></div>
+                        <div id="card-errors" role="alert" style="color:red; margin-top:5px;"></div>
+                    </div>
+
+                    <button type="submit" id="submit-button" class="btn-gold btn-hero">🎟️ Acheter maintenant</button>
+                </form>
+            </div>
+        </section>
+
+
+        <div class="container">
+            <div class="cta-banner">
+                L’extraordinaire commence ici.<span style="color:var(--gold-yellow)">Des questions sur la réservation ?</span>
+                <div class="mt-3">
+                    <a href="contact.html" class="btn-gold btn-hero me-2">Contactez-nous</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="footer" class="footer position-relative">
+
+        <video autoplay muted loop playsinline class="footer-video">
+            <source src="assets/video/hero-bg.mp4" type="video/mp4">
+        </video>
+
+        <div class="footer-overlay"></div>
+
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <img src="assets/img/logo.webp" alt="Maxx Événements" style="height:80px;margin-right:10px;">
+                    </a>
+                    <div class="footer-contact pt-3">
+                        <p>Rue de la Magie, Marrakech</p>
+                        <p>Maroc</p>
+                        <p class="mt-3"><strong>Tél :</strong>
+                            <span class="copy-text" data-copy="+212760976379">+212 7 60 97 63 79</span>
+                        </p>
+                        <p><strong>Email :</strong>
+                            <span class="copy-text" data-copy="contact@maxx-evenements.ma">contact@maxx-evenements.ma</span>
+                        </p>
+                    </div>
+
+                    <div id="copy-alert">Copié !</div>
+                    <div class="social-links d-flex mt-4">
+                        <a href="https://wa.me/212612345678" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                        <a href="https://facebook.com/maxxevenements" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com/maxxevenements" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://linkedin.com/company/maxxevenements" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Liens utiles</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="blog.html">Actualités</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="terms.html">terms</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="organisation.html">Organisation</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="management.html">Management</a></li>
+                        <li><a href="karaoke.html">Karaoké</a></li>
+                        <li><a href="gestion-lieux.html">Gestion de lieux</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Recevez nos actualités et inspirations événementielles.</p>
+                    <form action="#" method="post" class="d-flex">
+                        <input type="email" name="email" placeholder="Votre email" class="form-control" required>
+                        <button type="submit" class="btn" style="background:var(--gold-yellow);color:var(--deep-purple);font-weight:700;">S’inscrire</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+            <p><strong class="px-1 sitename" style="color:var(--gold-yellow);">Copyright 2025 © MAXX EVENEMENTS Maroc</strong></p>
+        </div>
+    </footer>
+
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="background:var(--gold-yellow);color:var(--deep-purple);"><i class="bi bi-arrow-up-short"></i></a>
+
+    <div id="preloader"></div>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeEls = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.style.opacity = 1;
+                });
+            }, {
+                threshold: 0.15
+            });
+            fadeEls.forEach(el => observer.observe(el));
+        });
+    </script>
+
+
+    <script>
+        const stripe = Stripe("pk_test_51M6yuaGVGY5ZHyS9jEshZaF7gFBLdMYddx1I2537aLOkdG2e0HScrTJvZuUrI06cRHmnqRt2UqXdE7Uliv4CwacR00pZOiw5Lt");
+        const elements = stripe.elements();
+
+        const card = elements.create("card", {
+            style: {
+                base: {
+                    fontSize: "16px",
+                    color: "#32325d",
+                    "::placeholder": {
+                        color: "#a0aec0"
+                    }
+                }
+            }
+        });
+        card.mount("#card-element");
+
+        card.on("change", (event) => {
+            const displayError = document.getElementById("card-errors");
+            displayError.textContent = event.error ? event.error.message : "";
+        });
+
+        const form = document.getElementById("payment-form");
+        const submitButton = document.getElementById("submit-button");
+
+        form.addEventListener("submit", async(e) => {
+            e.preventDefault();
+
+            // Disable the button to prevent multiple submissions
+            submitButton.disabled = true;
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const type = document.getElementById("type").value;
+            const quantity = parseInt(document.getElementById("quantity").value);
+
+            if (type === "") {
+                alert("Veuillez choisir un type de billet.");
+                submitButton.disabled = false;
+                return;
+            }
+
+            try {
+                // Step 1: Create Payment Intent on server
+                const response = await fetch("http://localhost:3000/buy-ticket", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        type,
+                        quantity
+                    })
+                });
+
+                // Check if the response is valid before parsing
+                if (!response.ok) {
+                    const errorResult = await response.json().catch(() => ({ error: "Erreur serveur inconnue" }));
+                    throw new Error(errorResult.error || "Erreur lors du paiement.");
+                }
+
+                const result = await response.json();
+                const clientSecret = result.clientSecret;
+
+                // Step 2: Confirm card payment
+                const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name,
+                            email
+                        }
+                    }
+                });
+
+                if (paymentResult.error) {
+                    alert(paymentResult.error.message);
+                } else if (paymentResult.paymentIntent && paymentResult.paymentIntent.status === "succeeded") {
+                    alert("Paiement réussi ! Merci pour votre achat.");
+                    form.reset();
+                    card.clear();
+                }
+            } catch (err) {
+                alert("Erreur: " + err.message);
+            } finally {
+                // Re-enable the button after the process is complete
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

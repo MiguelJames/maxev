@@ -1,0 +1,19 @@
+{
+  "name": "ticket-payment",
+  "version": "1.0.0",
+  "description": "Ticket payment system with Stripe and Nodemailer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.5",
+    "stripe": "^18.5.0"
+  }
+}

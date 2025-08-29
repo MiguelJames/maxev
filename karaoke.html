@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Karaoké | Maxx Événements - Marrakech</title>
+  <meta name="description" content="Karaoké à Marrakech : animations fun et dynamiques, matériel professionnel, playlist variée pour vos événements professionnels.">
+  <meta name="keywords" content="karaoké, animation, événement, Marrakech, Maxx Événements, fun, dynamique, playlist, matériel">
+  <meta name="author" content="Maxx Événements">
+  <meta name="robots" content="karaoke, follow">
+
+  <!-- Social Media / Open Graph -->
+  <meta property="og:title" content="Maxx Événements - Créateur d’émotions à Marrakech">
+  <meta property="og:description" content="Transformez vos événements en souvenirs inoubliables avec Maxx Événements.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxx-evenements.ma/karaoke.html">
+  <meta property="og:image" content="assets/img/og-image.webp">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts: Kanit for headings, Roboto for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Preload key images and fonts for performance -->
+  <link rel="preload" href="assets/img/logo.webp" as="image">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" as="style">
+
+  <!-- Optional: Favicon SVG for sharper icons on modern browsers -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <!-- Optional: Improve mobile web app experience -->
+  <meta name="theme-color" content="#4C344C">
+
+  <style>
+    :root {
+      --gold-yellow: rgb(251, 191, 8);
+      --pink-magenta: rgb(226, 64, 109);
+      --deep-purple: rgb(76, 52, 76);
+      --orange: rgb(242, 131, 54);
+      --light-beige: rgb(250, 245, 228);
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--light-beige);
+      color: var(--deep-purple);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+      font-weight: 800;
+      color: var(--pink-magenta);
+      letter-spacing: 0.5px;
+    }
+    .section-title {
+      color: var(--pink-magenta);
+      font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+    .karaoke-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px 0 rgba(76,52,76,0.07);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+    .karaoke-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 32px 0 rgba(226,64,109,0.10);
+      background: linear-gradient(120deg, rgba(251,191,8,0.08) 0%, rgba(226,64,109,0.08) 100%);
+    }
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--gold-yellow);
+      color: var(--deep-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      box-shadow: 0 4px 18px rgba(251,191,8,0.10);
+      flex-shrink: 0;
+    }
+    @keyframes bounce {
+      to { transform: translateY(-8px); }
+    }
+    .karaoke-card h4 {
+      color: var(--pink-magenta);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .karaoke-card p {
+      color: var(--deep-purple);
+      font-size: 1rem;
+      opacity: 0.88;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+    }
+    .fade-in[style*="opacity: 1"] {
+      transform: none;
+    }
+    .service-card, .service-detail-card, .event-type-card, .artist-card, .venue-card {
+      transition: box-shadow 0.3s cubic-bezier(.77,0,.18,1), transform 0.3s cubic-bezier(.77,0,.18,1);
+      box-shadow: 0 2px 12px rgba(76,52,76,0.08);
+      border-radius: 18px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .service-card:hover, .service-detail-card:hover, .event-type-card:hover, .artist-card:hover, .venue-card:hover {
+      box-shadow: 0 8px 32px rgba(226,64,109,0.18);
+      transform: translateY(-8px) scale(1.04);
+      z-index: 2;
+    }
+    .page-title-section {
+      background: linear-gradient(120deg, rgba(76,52,76,0.92) 70%, rgba(226,64,109,0.75) 100%), url('assets/img/events/showcase-9.webp') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 6.5rem 0 3rem 0;
+      margin-bottom: 0;
+    }
+    .page-title-section h1 {
+      color: var(--gold-yellow);
+      font-size: 2.4rem;
+      font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 16px rgba(76,52,76,0.10);
+    }
+    .page-title-section p {
+      color: #fff;
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 0;
+    }
+    @media (max-width: 991px) {
+      .page-title-section { padding: 5rem 0 2rem 0; }
+      .page-title-section h1 { font-size: 1.5rem; }
+    }
+    @media (max-width: 575px) {
+      .page-title-section { padding: 4rem 0 1rem 0; }
+      .karaoke-card { min-height: 160px; }
+    }
+
+        /* Ensure pagination dots are below the slider */
+.artist-swiper {
+  position: relative;
+}
+
+.artist-swiper .swiper-pagination {
+  bottom: 10px; /* distance from bottom of slider */
+  top: auto;    /* override any top positioning */
+  text-align: center;
+  width: 100%;
+}
+
+.artist-swiper .swiper-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+    /* CTA Section Styling */
+.cta-section {
+  background: linear-gradient(135deg, var(--deep-purple), var(--pink-magenta));
+  border-radius: 80px;
+  margin: 3rem auto;
+  max-width: 1200px;
+  box-shadow: 0 8px 32px rgba(76,52,76,0.3);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.cta-section .btn-cta {
+  background-color: var(--gold-yellow);
+  color: var(--deep-purple);
+  font-weight: 700;
+  border-radius: 50px;
+  padding: 0.85rem 2rem;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-section .btn-cta:hover {
+  background-color: var(--deep-purple);
+  color: var(--gold-yellow);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+
+  </style>
+</head>
+
+<body class="karaoke-page">
+
+        
+    <!-- Include this in your HTML body -->
+<div class="crosshair" id="crosshair"></div>
+
+
+  <!-- Header/Navbar -->
+  <header id="header" class="header d-flex align-items-center fixed-top" style="background: var(--deep-purple);">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+                <video autoplay loop muted playsinline style="height:100px; width:auto;">
+  <source src="assets/logo-spin.webm" type="video/webm">
+</video>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" >Accueil</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li class="dropdown">
+            <a href="Services.html" class="active"> <span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="organisation.html" >Organisation d’événements</a></li>
+              <li><a href="production.html" >Production de spectacles et artistes</a></li>
+              <li><a href="management.html">Management d’artistes</a></li>
+              <li><a href="karaoke.html" class="active">Karaoké</a></li>
+              <li><a href="gestion-lieux.html">Gestion déléguée de lieux</a></li>
+            </ul>
+          </li>
+          <li><a href="gallery.html">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-gold btn-hero" href="contact.html">Demander un devis</a>
+    </div>
+  </header>
+
+  <main class="main">
+
+    
+<!-- Hero Section with Video Effect -->
+<section class="hero-section">
+  <!-- Background Video -->
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="assets/img/events/showcase-9.webp">
+    <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+  
+
+  <!-- Hero Content -->
+  <div class="container hero-content text-center">
+   <h1 class="hero-title">Karaoké</h1>
+   <div class="hero-subtitle">
+  Vivez des soirées inoubliables avec nos matériels Karaoké.<br>
+  Chantez vos titres préférés, partagez des moments de joie et laissez-vous emporter par l'ambiance festive que nous créons pour vous.
+   </div>
+  </div>
+</section>
+
+    <!-- CTA Section -->
+<section class="cta-section py-5 text-center">
+  <div class="container">
+    <h2 class="mb-4" style="font-family:'Kanit',sans-serif;font-weight:800; color: var(--gold-yellow);">
+      Libérez la star qui sommeille en vous avec Maxx Evènements, spécialiste du Karaoké qui fait vibrer le Maroc.
+    </h2>
+    <p style="color:#fff; font-size:1.1rem; margin-bottom:2rem;">
+      Que vous soyez un bar-lounge animé, un restaurant convivial, une discothèque, un resort ou une entreprise cherchant à dynamiser ses équipes ou tout simplement en recherche d’une animation capable de transformer une soirée en un moment inoubliable, nous avons la solution karaoké qu’il vous faut.<br>
+
+Chez Maxx Evènements, nous aimons la richesse de la culture marocaine et la diversité des goûts musicaux. C’est pourquoi notre catalogue est une véritable caverne d’Ali Baba sonore, remplie de vos tubes préférés, des classiques en arabe qui réchauffent l’ambiance aux hits français indémodables qui vous feront chanter à tue-tête. <br>
+
+Préparez-vous à chanter avec émotion, à danser sans compter et à créer des souvenirs mémorables !<br>
+
+Experts depuis 1996 en Karaoké, notre offre ne s’arrête pas là. Au-delà de l’animation de vos soirées, nous vous offrons la liberté du karaoké en permanence !<br>
+    </p>
+  </div>
+</section>
+
+    <!-- Service Details -->
+    <section class="container py-5">
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-6 fade-in delay-1">
+          <div class="service-detail-card">
+            <div class="icon-circle"><i class="bi bi-mic"></i></div>
+            <h4>Animation sur-mesure</h4>
+            <p>Des animateurs professionnels pour créer une ambiance festive et conviviale, adaptée à votre public.</p>
+          </div>
+        </div>
+        <div class="col-lg-6 fade-in delay-2">
+          <div class="service-detail-card">
+            <div class="icon-circle"><i class="bi bi-headphones"></i></div>
+            <h4>Matériel professionnel</h4>
+            <p>Sonorisation, micros sans fil, petits et grands écrans, appli avec titres à chanter...tout le nécessaire pour vivre une expérience inoubliable !</p>
+          </div>
+        </div>
+        <div class="col-lg-6 fade-in delay-3">
+          <div class="service-detail-card">
+            <div class="icon-circle"><i class="bi bi-music-note-list"></i></div>
+            <h4>Playlist variée</h4>
+            <p>Des milliers de titres, tous styles et tous styles en français, arabe et en anglais pour satisfaire tous les goûts et toutes les générations.</p>
+          </div>
+        </div>
+        <div class="col-lg-6 fade-in delay-4">
+          <div class="service-detail-card">
+            <div class="icon-circle"><i class="bi bi-people"></i></div>
+            <h4>Pour tous vos événements</h4>
+            <p>Anniversaires, soirées , séminaires, team building, fêtes d’entreprise… le karaoké s’invite partout !</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Gallery/Slider of Karaoke Events -->
+<section class="container py-3">
+  <h2 class="section-title text-center mb-4">Avec le karaoké, la star ? C'est vous !</h2>
+  <div class="swiper-container artist-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="assets/img/events/karaoke2.png" alt="Karaoké Marrakech"></div>
+      <div class="swiper-slide"><img src="assets/img/events/karaoke1.png" alt="Soirée "></div>
+      <div class="swiper-slide"><img src="assets/img/events/karaoke3.png" alt="Animation karaoké"></div>
+      <div class="swiper-slide"><img src="assets/img/events/karaoke4.png" alt="Team building"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+  </main>
+
+    <!-- Footer -->
+<footer id="footer" class="footer position-relative">
+  
+  <!-- Background video -->
+  <video autoplay muted loop playsinline class="footer-video">
+    <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Purple overlay -->
+  <div class="footer-overlay"></div>
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.webp" alt="Maxx Événements" style="height:80px;margin-right:10px;">
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Rue de la Magie, Marrakech</p>
+          <p>Maroc</p>
+          <p class="mt-3"><strong>Tél :</strong> 
+          <span class="copy-text" data-copy="+212760976379">+212 7 60 97 63 79</span>
+          </p>
+          <p><strong>Email :</strong> 
+          <span class="copy-text" data-copy="contact@maxx-evenements.ma">contact@maxx-evenements.ma</span>
+          </p>
+        </div>
+
+        <!-- Copied message -->
+        <div id="copy-alert">Copié !</div>
+        <div class="social-links d-flex mt-4">
+          <a href="https://wa.me/212612345678" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="https://facebook.com/maxxevenements" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/maxxevenements" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://linkedin.com/company/maxxevenements" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="gallery.html">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">terms</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="organisation.html">Organisation</a></li>
+          <li><a href="production.html">Production</a></li>
+          <li><a href="management.html">Management</a></li>
+          <li><a href="karaoke.html">Karaoké</a></li>
+          <li><a href="gestion-lieux.html">Gestion de lieux</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-12 footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Recevez nos actualités et inspirations événementielles.</p>
+        <form action="#" method="post" class="d-flex">
+          <input type="email" name="email" placeholder="Votre email" class="form-control" required>
+          <button type="submit" class="btn" style="background:var(--gold-yellow);color:var(--deep-purple);font-weight:700;">S’inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p><strong class="px-1 sitename" style="color:var(--gold-yellow);">Copyright 2025 © MAXX EVENEMENTS Maroc</strong></p>
+  </div>
+</footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="background:rgb(251,191,8);color:rgb(76,52,76);"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Fade-in on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeEls = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.style.opacity = 1;
+        });
+      }, { threshold: 0.15 });
+      fadeEls.forEach(el => observer.observe(el));
+    });
+    // Swiper for karaoke events
+    var swiper = new Swiper('.karaoke-swiper', {
+      slidesPerView: 2,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        320: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1200: { slidesPerView: 2 }
+      }
+    });
+  </script>
+    <script>
+    // Swiper for artists
+    var swiper = new Swiper('.artist-swiper', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        320: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1200: { slidesPerView: 3 }
+      }
+    });
+  </script>
+</body>
+</html>

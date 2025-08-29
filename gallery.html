@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Galerie | Maxx Événements - Moments d’Exception</title>
+  <meta name="description" content="Découvrez la galerie Maxx Événements : concerts, événements corporate, soirées  et spectacles. Vivez l’excellence en images.">
+  <meta name="keywords" content="Maxx Événements, Galerie, Concerts, Corporate, Spectacles, Événementiel, Maroc">
+  <meta name="author" content="Maxx Événements">
+  <meta name="robots" content="Galerie, follow">
+
+  <!-- Social Media / Open Graph -->
+  <meta property="og:title" content="Maxx Événements - Créateur d’émotions à Marrakech">
+  <meta property="og:description" content="Transformez vos événements en souvenirs inoubliables avec Maxx Événements.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxx-evenements.ma/gallery.html">
+  <meta property="og:image" content="assets/img/og-image.webp">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts: Kanit for headings, Roboto for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Preload key images and fonts for performance -->
+  <link rel="preload" href="assets/img/logo.webp" as="image">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" as="style">
+
+  <!-- Optional: Favicon SVG for sharper icons on modern browsers -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <!-- Optional: Improve mobile web app experience -->
+  <meta name="theme-color" content="#4C344C">
+
+  <style>
+    body.gallery-page {
+      background: rgb(250, 245, 228);
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .page-title {
+      background: rgb(76, 52, 76);
+      color: #fff;
+      padding-top: 120px;
+      padding-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+    .page-title h1 {
+      font-family: 'Kanit', Arial, sans-serif;
+      font-weight: 900;
+      color: rgb(226, 64, 109);
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(76,52,76,0.15);
+    }
+    .page-title p {
+      font-size: 1.15rem;
+      color: #fff;
+      opacity: 0.85;
+      margin-bottom: 15px;
+    }
+    .breadcrumbs {
+      background: none;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+    .breadcrumbs a {
+      color: rgb(251, 191, 8);
+      text-decoration: underline;
+    }
+    .gallery-filters {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .gallery-filters .btn {
+      font-family: 'Kanit', Arial, sans-serif;
+      font-weight: 700;
+      margin: 0 8px 8px 0;
+      border-radius: 30px;
+      padding: 8px 28px;
+      background: rgb(76, 52, 76);
+      color: #fff;
+      border: 2px solid rgb(226, 64, 109);
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(76,52,76,0.08);
+    }
+    .gallery-filters .btn.active,
+    .gallery-filters .btn:hover {
+      background: rgb(226, 64, 109);
+      color: #fff;
+      border-color: rgb(251, 191, 8);
+      box-shadow: 0 4px 16px rgba(226,64,109,0.12);
+    }
+    .gallery.section {
+      padding: 40px 0 60px 0;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(76,52,76,0.10);
+      background: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(0.85);
+    }
+    .gallery-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(0deg, rgba(76,52,76,0.92) 70%, rgba(76,52,76,0.0) 100%);
+      color: rgb(251, 191, 8);
+      font-family: 'Kanit', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 14px 18px 10px 18px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+    .gallery-item:hover .gallery-title {
+      opacity: 1;
+    }
+    .gallery-links {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-links {
+      opacity: 1;
+    }
+    .gallery-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgb(76, 52, 76);
+      color: #fff;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.3rem;
+      box-shadow: 0 2px 8px rgba(242,131,54,0.15);
+      transition: background 0.2s, color 0.2s;
+    }
+    .gallery-links a:hover {
+      background: rgb(251, 191, 8);
+      color: rgb(76, 52, 76);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @media (max-width: 991px) {
+      .gallery-item img {
+        height: 180px;
+      }
+    }
+    @media (max-width: 575px) {
+      .gallery-item img {
+        height: 120px;
+      }
+      .page-title h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="gallery-page">
+
+        
+    <!-- Include this in your HTML body -->
+<div class="crosshair" id="crosshair"></div>
+
+
+  <!-- Header/Navbar -->
+  <header id="header" class="header d-flex align-items-center fixed-top" style="background: var(--deep-purple);">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+                <video autoplay loop muted playsinline style="height:100px; width:auto;">
+  <source src="assets/logo-spin.webm" type="video/webm">
+</video>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" >Accueil</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li class="dropdown">
+            <a href="Services.html"> <span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="organisation.html" >Organisation d’événements</a></li>
+              <li><a href="production.html" >Production de spectacles et artistes</a></li>
+              <li><a href="management.html">Management d’artistes</a></li>
+              <li><a href="karaoke.html" >Karaoké</a></li>
+              <li><a href="gestion-lieux.html">Gestion déléguée de lieux</a></li>
+            </ul>
+          </li>
+          <li><a href="gallery.html"  class="active">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-gold btn-hero" href="contact.html">Demander un devis</a>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section with Video Effect -->
+<section class="hero-section">
+  <!-- Background Video -->
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="assets/img/events/showcase-9.webp">
+    <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Hero Content -->
+  <div class="container hero-content text-center">
+<h1 class="hero-title">Galerie</h1>
+<div class="hero-subtitle">
+  Découvrez nos événements en images et revivez les moments forts.<br>
+  Chaque photo capture l'ambiance, l'énergie et la magie que nous créons pour nos spectacles et soirées.
+</div>
+  </div>
+</section>
+    <section>
+    <!-- Gallery Filters -->
+    <div class="gallery-filters container">
+      <button class="btn active" data-filter="*">Tous</button>
+      <button class="btn" data-filter=".concerts">Concerts</button>
+      <button class="btn" data-filter=".corporate">Corporate</button>
+      <button class="btn" data-filter=".spectacles">Spectacles</button>
+    </div>
+    </section>
+    <!-- Gallery Grid -->
+    <section id="gallery" class="gallery section">
+      <div class="container-fluid">
+        <div class="row gy-4 justify-content-center" id="gallery-grid">
+
+          <!-- Concerts -->
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item concerts">
+            <img src="assets/img/events/gallery-1.webp" class="img-fluid" alt="Concert Maxx">
+            <div class="gallery-title">Concert Live</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-1.webp" title="Concert Live" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item concerts">
+            <img src="assets/img/events/gallery-2.webp" class="img-fluid" alt="Concert DJ">
+            <div class="gallery-title">DJ Night</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-2.webp" title="DJ Night" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+
+          <!-- Corporate -->
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item corporate">
+            <img src="assets/img/events/gallery-3.webp" class="img-fluid" alt="Corporate Gala">
+            <div class="gallery-title">Gala Corporate</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-3.webp" title="Gala Corporate" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item corporate">
+            <img src="assets/img/events/gallery-4.webp" class="img-fluid" alt="Séminaire">
+            <div class="gallery-title">Séminaire</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-4.webp" title="Séminaire" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+
+          <!-- Privés -->
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item prives">
+            <img src="assets/img/events/gallery-5.webp" class="img-fluid" alt="Soirée ">
+            <div class="gallery-title">Soirée </div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-5.webp" title="Soirée " class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item prives">
+            <img src="assets/img/events/gallery-6.webp" class="img-fluid" alt="Anniversaire">
+            <div class="gallery-title">Anniversaire</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-6.webp" title="Anniversaire" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+
+          <!-- Spectacles -->
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item spectacles">
+            <img src="assets/img/events/gallery-7.webp" class="img-fluid" alt="Spectacle Humoriste">
+            <div class="gallery-title">Spectacle Humoriste</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-7.webp" title="Spectacle Humoriste" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 gallery-item spectacles">
+            <img src="assets/img/events/gallery-8.webp" class="img-fluid" alt="Spectacle Magicien">
+            <div class="gallery-title">Spectacle Magicien</div>
+            <div class="gallery-links">
+              <a href="assets/img/events/gallery-8.webp" title="Spectacle Magicien" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+<footer id="footer" class="footer position-relative">
+  
+  <!-- Background video -->
+  <video autoplay muted loop playsinline class="footer-video">
+    <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Purple overlay -->
+  <div class="footer-overlay"></div>
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.webp" alt="Maxx Événements" style="height:80px;margin-right:10px;">
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Rue de la Magie, Marrakech</p>
+          <p>Maroc</p>
+          <p class="mt-3"><strong>Tél :</strong> 
+          <span class="copy-text" data-copy="+212760976379">+212 7 60 97 63 79</span>
+          </p>
+          <p><strong>Email :</strong> 
+          <span class="copy-text" data-copy="contact@maxx-evenements.ma">contact@maxx-evenements.ma</span>
+          </p>
+        </div>
+
+        <!-- Copied message -->
+        <div id="copy-alert">Copié !</div>
+        <div class="social-links d-flex mt-4">
+          <a href="https://wa.me/212612345678" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="https://facebook.com/maxxevenements" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/maxxevenements" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://linkedin.com/company/maxxevenements" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="gallery.html">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">terms</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="organisation.html">Organisation</a></li>
+          <li><a href="production.html">Production</a></li>
+          <li><a href="management.html">Management</a></li>
+          <li><a href="karaoke.html">Karaoké</a></li>
+          <li><a href="gestion-lieux.html">Gestion de lieux</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-12 footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Recevez nos actualités et inspirations événementielles.</p>
+        <form action="#" method="post" class="d-flex">
+          <input type="email" name="email" placeholder="Votre email" class="form-control" required>
+          <button type="submit" class="btn" style="background:var(--gold-yellow);color:var(--deep-purple);font-weight:700;">S’inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p><strong class="px-1 sitename" style="color:var(--gold-yellow);">Copyright 2025 © MAXX EVENEMENTS Maroc</strong></p>
+  </div>
+</footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="background:rgb(226,64,109);color:#fff;"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Gallery Filter JS -->
+  <script>
+    // Fade-in animation for gallery items
+    document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach((item, i) => {
+        item.style.animationDelay = (i * 0.08) + 's';
+      });
+    });
+
+    // Gallery filter logic
+    document.querySelectorAll('.gallery-filters .btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.gallery-filters .btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.gallery-item').forEach(function (item) {
+          if (filter === '*' || item.classList.contains(filter.substring(1))) {
+            item.style.display = '';
+            setTimeout(() => item.classList.add('show'), 10);
+          } else {
+            item.style.display = 'none';
+            item.classList.remove('show');
+          }
+        });
+      });
+    });
+
+    // GLightbox init
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  </script>
+</body>
+</html>

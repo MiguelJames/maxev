@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Primary SEO -->
+  <title>Accueil | Maxx Événements - Créateur d’émotions à Marrakech</title>
+  <meta name="description" content="Maxx Événements, agence d’événementiel à Marrakech, transforme vos moments en souvenirs inoubliables. Organisation, production, management, gestion de lieux, galerie, contact.">
+  <meta name="keywords" content="événementiel Marrakech, organisation événements, spectacles, artistes, management, galerie, Maxx Événements">
+  <meta name="author" content="Maxx Événements">
+  <meta name="robots" content="index, follow">
+
+  <!-- Social Media / Open Graph -->
+  <meta property="og:title" content="Maxx Événements - Créateur d’émotions à Marrakech">
+  <meta property="og:description" content="Transformez vos événements en souvenirs inoubliables avec Maxx Événements.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxx-evenements.ma/">
+  <meta property="og:image" content="assets/logo-spin.webm">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
+
+  <!-- Fonts: Kanit for headings, Roboto for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Preload key images and fonts for performance -->
+  <link rel="preload" href="assets/img/logo.webp" as="image">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;800&family=Roboto:wght@300;400;500;700&display=swap" as="style">
+
+  <!-- Optional: Favicon SVG for sharper icons on modern browsers -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <!-- Optional: Improve mobile web app experience -->
+  <meta name="theme-color" content="#4C344C">
+<style>
+/* Testimonials Section */
+.testimonials-section {
+  background: var(--deep-purple);
+  color: #fff;
+  padding: 3rem 0 3.5rem 0;
+  border-radius: 18px;
+  margin: 2rem auto;
+  max-width: 1200px;
+  box-shadow: 0 2px 24px 0 rgba(76,52,76,0.10);
+  text-align: center;
+}
+
+/* Flex row to center cards */
+.testimonials-section .row {
+  display: flex;
+  justify-content: center;  /* center all cards */
+  flex-wrap: wrap;          /* wrap cards on smaller screens */
+  gap: 1rem;                /* spacing between cards */
+}
+
+/* Card styling */
+.testimonial-card {
+  background: #fff;
+  color: var(--deep-purple);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px 0 rgba(76,52,76,0.10);
+  padding: 1.5rem 1.2rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  position: relative;
+  min-height: 180px;
+  flex: 0 0 300px;          /* fixed width for proper centering */
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(226,64,109,0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Icon */
+.testimonial-card .icon {
+  color: var(--orange);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Name */
+.testimonial-card .testimonial-name {
+  font-family: 'Kanit', Arial, sans-serif;
+  font-weight: 700;
+  color: var(--pink-magenta);
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* Role */
+.testimonial-card .testimonial-role {
+  font-size: 0.95rem;
+  color: var(--deep-purple);
+  opacity: 0.7;
+}
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(.77,0,.18,1), box-shadow 0.5s;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.12) rotateZ(1deg);
+  filter: brightness(1.1);
+}
+
+.gallery-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 18px;
+}
+
+.gallery-card:hover::before {
+  opacity: 1;
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: #fff;
+  z-index: 2;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.gallery-card:hover .overlay-text {
+  transform: translateY(-10px);
+  opacity: 1;
+}
+
+.overlay-text h5 {
+  margin: 0;
+  font-weight: 700;
+}
+
+
+</style>
+</head>
+
+<body>
+  <!-- Include this in your HTML body -->
+<div class="crosshair" id="crosshair"></div>
+
+  <!-- Header/Navbar -->
+  <header id="header" class="header d-flex align-items-center fixed-top" style="background: var(--deep-purple);">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+<video autoplay loop muted playsinline style="height:100px; width:auto;">
+  <source src="assets/logo-spin.webm" type="video/webm">
+</video>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" class="active">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li class="dropdown">
+            <a href="Services.html"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="organisation.html">Organisation d’événements</a></li>
+              <li><a href="production.html">Production de spectacles et artistes</a></li>
+              <li><a href="management.html">Management d’artistes</a></li>
+              <li><a href="karaoke.html">Karaoké</a></li>
+              <li><a href="gestion-lieux.html">Gestion déléguée de lieux</a></li>
+            </ul>
+          </li>
+          <li><a href="gallery.html">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-gold btn-hero" href="contact.html">Demander un devis</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <video class="hero-bg-video" autoplay muted loop playsinline poster="assets/img/events/showcase-9.webp">
+      <source src="assets/video/hero-bg.mp4" type="video/mp4">
+      <!-- fallback image -->
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 class="hero-title">Maxx Evènements : Votre Partenaire Événementiel</h1>
+      <div class="hero-subtitle">
+        Découvrez l’événementiel en mode premium avec Maxx Evènements !<br>
+        Notre agence implantée à Marrakech vous offre une expérience inégalée, alliant expertise, créativité et engagement.
+<br>Nos services variés couvrent trois domaines principaux
+      </div>
+      <a href="contact.html" class="btn-gold btn-hero">Confiez-nous votre événement</a>
+    </div>
+  </section>
+
+<!-- Introduction/About the agency -->
+<section class="container py-5 text-center">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 fade-in delay-1">
+      <div class="about-card mx-auto">
+<div >
+  <video autoplay loop muted playsinline style="height:150px; width:auto;">
+  <source src="assets/logo-spin.webm" type="video/webm">
+</video>
+</div>
+
+        <h4 class="mb-3">Maxx Evènements : agence évènementielle de confiance !</h4>
+        <p>Chez <a href="index.html" rel="noopener">Maxx Evènements</a> , notre mission est de donner vie à vos rêves événementiels avec une touche d’excellence. Forts de notre expérience, de notre créativité sans limites et de notre engagement inébranlable envers la qualité, nous sommes votre partenaire de confiance pour tous vos besoins en événementiel.</p>
+        <p>Nous croyons en la magie des événements bien orchestrés, que ce soit des salons professionnels dynamiques, des concerts envoûtants, des animations à thème captivantes ou des ventes éphémères percutantes. Chaque détail est soigneusement pensé, chaque moment est savamment orchestré, et chaque participant est au cœur de notre attention.</p>
+        <p>Lorsque vous choisissez Maxx Evènements, vous choisissez l’assurance d’un service de qualité supérieure, d’une créativité sans limites et d’un engagement indéfectible envers le succès de votre événement. <a href="contact.html" rel="noopener">Contactez-nous</a> pour créer des souvenirs inoubliables et découvrez comment nous pouvons faire briller votre prochain projet événementiel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Highlight Cards: Services Overview -->
+<section class="container py-5">
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-4 fade-in delay-1">
+      <a href="organisation.html" style="text-decoration:none;">
+        <div class="highlight-card">
+          <div class="icon"><i class="bi bi-calendar2-check"></i></div>
+          <h4>Organisation d’événements</h4>
+          <p>Conception, planification et coordination sur-mesure pour tous vos événements privés et professionnels.</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4 fade-in delay-2">
+      <a href="production.html" style="text-decoration:none;">
+        <div class="highlight-card">
+          <div class="icon"><i class="bi bi-music-note-beamed"></i></div>
+          <h4>Production de spectacles</h4>
+          <p>DJ, chanteurs, humoristes, magiciens… Nous produisons des shows artistiques mémorables.</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4 fade-in delay-3">
+      <a href="management.html" style="text-decoration:none;">
+        <div class="highlight-card">
+          <div class="icon"><i class="bi bi-person-video3"></i></div>
+          <h4>Management d’artistes</h4>
+          <p>Accompagnement de carrière, booking, promotion, gestion financière et stratégie sur-mesure.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-3">
+    <div class="col-md-4 fade-in delay-4">
+      <a href="gestion-lieux.html" style="text-decoration:none;">
+        <div class="highlight-card">
+          <div class="icon"><i class="bi bi-building-gear"></i></div>
+          <h4>Gestion déléguée de lieux</h4>
+          <p>Gestion complète de sites événementiels : vision artistique, logistique, finances, ressources humaines.</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4 fade-in delay-5">
+      <a href="Karaoké.html" style="text-decoration:none;">
+        <div class="highlight-card">
+          <div class="icon"><i class="bi bi-mic-fill"></i></div>
+          <h4>Karaoké</h4>
+          <p>Animation sur-mesure, Playlist variée, Matériel professionnel pour tous vos événements</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Featured Gallery/Events Section -->
+  <section class="container py-5">
+  <h2 class="text-center mb-4" style="color:var(--pink-magenta);font-family:'Kanit',sans-serif;font-weight:800;">
+    Galerie d’événements
+  </h2>
+  <div class="swiper gallery-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide gallery-card">
+        <img src="assets/img/events/gallery-1.webp" alt="Show case privé" class="img-fluid">
+        <div class="overlay-text">
+          <h5>Show case privé</h5>
+        </div>
+      </div>
+      <div class="swiper-slide gallery-card">
+        <img src="assets/img/events/gallery-2.webp" alt="Mariage à thème" class="img-fluid">
+        <div class="overlay-text">
+          <h5>Mariage à thème</h5>
+        </div>
+      </div>
+      <div class="swiper-slide gallery-card">
+        <img src="assets/img/events/gallery-3.webp" alt="Concert" class="img-fluid">
+        <div class="overlay-text">
+          <h5>Concert</h5>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+
+<!-- Testimonials/Reviews Section -->
+<section class="container testimonials-section">
+  <h2 class="text-center mb-4" style="color:var(--gold-yellow);font-family:'Kanit',sans-serif;font-weight:800;">
+    Ils nous font confiance
+  </h2>
+  <div class="row">
+    <div class="testimonial-card mb-3">
+      <div class="icon"><i class="bi bi-star-fill"></i></div>
+      <p>“Un accompagnement exceptionnel, une équipe à l’écoute et des prestations haut de gamme. Merci Maxx Événements !”</p>
+      <div class="testimonial-name">Sofia B.</div>
+      <div class="testimonial-role">Directrice RH, Groupe Atlas</div>
+    </div>
+    <div class="testimonial-card mb-3">
+      <div class="icon"><i class="bi bi-star-fill"></i></div>
+      <p>“Organisation parfaite de notre séminaire, ambiance magique et logistique irréprochable. Je recommande vivement.”</p>
+      <div class="testimonial-name">Karim L.</div>
+      <div class="testimonial-role">CEO, Marrakech Tech</div>
+    </div>
+    <div class="testimonial-card mb-3">
+      <div class="icon"><i class="bi bi-star-fill"></i></div>
+      <p>“Des artistes talentueux, une production professionnelle et une équipe passionnée. Bravo et merci !”</p>
+      <div class="testimonial-name">Nadia F.</div>
+      <div class="testimonial-role">Responsable Communication</div>
+    </div>
+  </div>
+</section>
+
+  <!-- CTA Banner -->
+  <div class="container">
+    <div class="cta-banner">
+     L’extraordinaire commence ici.<span style="color:var(--gold-yellow)">Réservez votre événement maintenant.</span>
+      <div class="mt-3">
+        <a href="contact.html" class="btn-gold btn-hero me-2">Contact</a>
+        <a href="buy-tickets.html" class="btn-gold btn-hero">Réserver</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+<footer id="footer" class="footer position-relative">
+  
+  <!-- Background video -->
+  <video autoplay muted loop playsinline class="footer-video">
+    <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Purple overlay -->
+  <div class="footer-overlay"></div>
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.webp" alt="Maxx Événements" style="height:80px;margin-right:10px;">
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Rue de la Magie, Marrakech</p>
+          <p>Maroc</p>
+          <p class="mt-3"><strong>Tél :</strong> 
+          <span class="copy-text" data-copy="+212760976379">+212 7 60 97 63 79</span>
+          </p>
+          <p><strong>Email :</strong> 
+          <span class="copy-text" data-copy="contact@maxx-evenements.ma">contact@maxx-evenements.ma</span>
+          </p>
+        </div>
+
+        <!-- Copied message -->
+        <div id="copy-alert">Copié !</div>
+        <div class="social-links d-flex mt-4">
+          <a href="https://wa.me/212612345678" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="https://facebook.com/maxxevenements" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/maxxevenements" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://linkedin.com/company/maxxevenements" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="gallery.html">Galerie</a></li>
+          <li><a href="blog.html">Actualités</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">terms</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="organisation.html">Organisation</a></li>
+          <li><a href="production.html">Production</a></li>
+          <li><a href="management.html">Management</a></li>
+          <li><a href="karaoke.html">Karaoké</a></li>
+          <li><a href="gestion-lieux.html">Gestion de lieux</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-12 footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Recevez nos actualités et inspirations événementielles.</p>
+        <form action="#" method="post" class="d-flex">
+          <input type="email" name="email" placeholder="Votre email" class="form-control" required>
+          <button type="submit" class="btn" style="background:var(--gold-yellow);color:var(--deep-purple);font-weight:700;">S’inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p><strong class="px-1 sitename" style="color:var(--gold-yellow);">Copyright 2025 © MAXX EVENEMENTS Maroc</strong></p>
+  </div>
+</footer>
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="background:var(--gold-yellow);color:var(--deep-purple);"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
